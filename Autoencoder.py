@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from tensorflow.examples.tutorials.mnist import input_data
 
 # Load the data
-mnist = input_data.read_data_sets('/tmp/data/', one_hot=True)
+mnist = input_data.read_data_sets('MNIST/', one_hot=True)
 
 # Setting up Parameters
 learning_rate = 0.001
@@ -101,16 +101,14 @@ for epoch in range(training_epochs):
 
     # Display logs per 5 epoch steps
     if epoch % display_step == 0:
-        print("Epoch: ", '%03d' % (epoch + 1),
-              "cost = ", "{:.9f}".format(c))
-
+        print("Epoch: ", '%02d' % (epoch + 1), "cost = ", "{:.9f}".format(c))
 print("Optimization Finished!")
 
 # Applying encode and decode over test set, Select the number of test cases as well
 encode_decode = sess.run(y_pred, feed_dict={X: mnist.test.images[:10]})
 
 # Compare original images with their reconstructions
-f, a = plt.subplots(2, 10, figsize=(10, 5))
+f, a = plt.subplots(2, 10, figsize=(10, 2))
 
 # Change range function to show the any number of examples to compare from
 for i in range(10):
