@@ -20,6 +20,7 @@ Our model would be 3 layered reducing features by each layer and reconstructing 
 [784] -> [256] -> [128] -> [64] -> [128] -> [256] -> [784]
 ```
 
-The end result for this implementation contains lot of noise as show below.
+The end result for this implementation contains lot of noise as shown below.
 <img src="Images/Output.png">
+
 This can be improved by implemeneting a Variational Autoencoder for reconstructing the input better ([Ref](https://arxiv.org/pdf/1512.09300.pdf)).
