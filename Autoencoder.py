@@ -10,7 +10,7 @@ mnist = input_data.read_data_sets('/tmp/data/', one_hot=True)
 learning_rate = 0.001
 training_epochs = 30
 batch_size = 256
-display_step = 1
+display_step = 5
 
 # Network parameters
 n_hidden_1 = 256  # 1st Layer num features
@@ -18,7 +18,7 @@ n_hidden_2 = 128  # 2nd Layer num features
 n_hidden_3 = 64  # 3rd Layer num features
 n_input = 784  # MNIST data input (img shape: 28*23)
 
-# tf Graph input(only pictures)
+# TensorFlow Graph input
 X = tf.placeholder(tf.float32, [None, n_input])
 
 # Declare weights and biases for each hidden layer
@@ -65,7 +65,7 @@ def decoder(x):
 
 
 # In place of variable cost we have loss function and in optimizer we have gradient used for back prop
-# Construct model
+# Construct model, encoder and decoder operation
 encoder_op = encoder(X)
 decoder_op = decoder(encoder_op)
 
@@ -75,16 +75,15 @@ y_pred = decoder_op
 # Targets (Labels) are the input data.
 y_true = X
 
-# Define loss and optimizer, minimize the squared error
+# Loss and Optimizer, Minimize the squared error
 cost = tf.reduce_mean(tf.pow(y_true - y_pred, 2))
 optimizer = tf.train.RMSPropOptimizer(learning_rate).minimize(cost)
 
-# Initializing the variables
+# Initialize the variables
 init = tf.global_variables_initializer()
 
-# Launch the graph
-# Using InteractiveSession (more convenient while using IPython Notebooks)
-sess = tf.InteractiveSession()
+# Launching the graph
+sess = tf.Session()
 sess.run(init)
 
 # Batch Size
@@ -92,12 +91,15 @@ total_batch = int(mnist.train.num_examples/batch_size)
 
 # Training cycle
 for epoch in range(training_epochs):
+
     # Loop over all batches
     for i in range(total_batch):
         batch_xs, batch_ys = mnist.train.next_batch(batch_size)
+
         # Run optimization op (backprop) and cost op (to get loss value)
         _, c = sess.run([optimizer, cost], feed_dict={X: batch_xs})
-    # Display logs per epoch step
+
+    # Display logs per 5 epoch steps
     if epoch % display_step == 0:
         print("Epoch: ", '%03d' % (epoch + 1),
               "cost = ", "{:.9f}".format(c))
@@ -112,6 +114,6 @@ f, a = plt.subplots(2, 10, figsize=(10, 5))
 
 # Change range function to show the any number of examples to compare from
 for i in range(10):
-    a[0][i].imshow(np.reshape(mnist.test.images[i], (28, 28)))
-    a[1][i].imshow(np.reshape(encode_decode[i], (28, 28)))
+    a[0][i].imshow(np.reshape(mnist.test.images[i], (28, 28)), cmap='gray')
+    a[1][i].imshow(np.reshape(encode_decode[i], (28, 28)), cmap='gray')
 plt.show()
