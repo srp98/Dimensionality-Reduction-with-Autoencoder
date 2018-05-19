@@ -2,3 +2,14 @@
 Autoencoders can be used for feature extraction and dimensionality reduction. They can also be combined with Restricted Boltzmann Machines to employ deep learning applications like Deep Belief Networks.
 
 It has Encoder and Decoder parts, Encoder compresses the input in a step by step process, it selects the most important features during compression. Decoder is opposite of encoder as it works to recreate the input as closely as possible.
+
+## Implementation
+The implementation uses MNIST dataset to reconstruct the input. 
+
+As MNIST images are of shape 28\*28 so input is 784.
+Our model would be 3 layered reducing features by each layer and reconstructing the inut in the decoder phase,
+
+```       
+        Encoder                            Decoder  
+[784] -> [256] -> [128] -> [64] -> [128] -> [256] -> [784]
+```
