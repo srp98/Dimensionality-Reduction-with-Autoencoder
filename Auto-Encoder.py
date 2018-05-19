@@ -7,8 +7,8 @@ from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets('/tmp/data/', one_hot=True)
 
 # Setting up Parameters
-learning_rate = 0.01
-training_epochs = 20
+learning_rate = 0.001
+training_epochs = 30
 batch_size = 256
 display_step = 1
 
@@ -21,7 +21,7 @@ n_input = 784  # MNIST data input (img shape: 28*23)
 # tf Graph input(only pictures)
 X = tf.placeholder(tf.float32, [None, n_input])
 
-# Declare weights and biases
+# Declare weights and biases for each hidden layer
 weights = {
     'encoder_h1': tf.Variable(tf.random_normal([n_input, n_hidden_1])),
     'encoder_h2': tf.Variable(tf.random_normal([n_hidden_1, n_hidden_2])),
