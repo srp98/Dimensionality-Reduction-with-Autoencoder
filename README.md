@@ -1,7 +1,13 @@
 # Dimensionality-Reduction-with-Autoencoder
 Autoencoders can be used for feature extraction and dimensionality reduction. They can also be combined with Restricted Boltzmann Machines to employ deep learning applications like Deep Belief Networks.
 
-It has Encoder and Decoder parts, Encoder compresses the input in a step by step process, it selects the most important features during compression. Decoder is opposite of encoder as it works to recreate the input as closely as possible.
+It has Encoder and Decoder phases, Encoder compresses the input in a step by step process, it selects the most important features during compression. Decoder is opposite of encoder as it works to recreate the input as closely as possible.
+
+## Requirements
+-Python 3.6 and above
+-TensorFlow 1.6.0 and above
+-Numpy
+-Matplotlib
 
 ## Implementation
 The implementation uses MNIST dataset to reconstruct the input. 
